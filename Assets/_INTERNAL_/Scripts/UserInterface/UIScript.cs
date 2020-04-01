@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Diagnostics;
+
 
 [AddComponentMenu("")]
 public class UIScript : MonoBehaviour
@@ -12,7 +14,7 @@ public class UIScript : MonoBehaviour
 	public GameType gameType = GameType.Score;
 
 	// If the scoreToWin is -1, the game becomes endless (no win conditions, but you could do game over)
-	public int scoreToWin = 5;
+	public int scoreToWin = 10000000;
 
 
 	[Header("References (don't touch)")]
@@ -26,14 +28,20 @@ public class UIScript : MonoBehaviour
 
 
 	// Internal variables to keep track of score, health, and resources, win state
-	private int[] scores = new int[2];
-	private int[] playersHealth = new int[2];
+	public int[] scores = new int[2];
+	public int[] playersHealth = new int[2];
 	private Dictionary<int, ResourceStruct> resourcesDict = new Dictionary<int, ResourceStruct>(); //holds a reference to all the resources collected, and to their UI
-    private bool gameOver = false; //this gets changed when the game is won OR lost
+    public bool gameOver = false; //this gets changed when the game is won OR lost
 
-
-	private void Start()
+ 
+ 	public Stopwatch timer;
+ 
+ 	private void Start()
 	{
+		//ctr
+		timer = new Stopwatch();
+		timer.Start();
+
 		if(numberOfPlayers == Players.OnePlayer)
 		{
 			// No setup needed
@@ -107,7 +115,8 @@ public class UIScript : MonoBehaviour
 	{
 		// only set game over UI if game is not over
 	    if (!gameOver)
-	    {
+	    { 
+			timer.Stop();
 			gameOver = true;
 			// winLabel.text = "Player " + ++playerNumber + " wins!";
 			winLabel.text = "Congrats! Way to flatten the curve!!";
@@ -123,6 +132,7 @@ public class UIScript : MonoBehaviour
         // only set game over UI if game is not over
 	    if (!gameOver)
 	    {
+			timer.Stop();
 			gameOver = true;
 	        statsPanel.SetActive(false);
 	        gameOverPanel.SetActive(true);
