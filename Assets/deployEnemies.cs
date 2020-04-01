@@ -61,7 +61,18 @@ public class deployEnemies : MonoBehaviour
 
     IEnumerator enemyWave(){        
         while(true && !gameStats.gameOver){
-            yield return new WaitForSeconds(respawnTimeEnemies);
+            //the higher the harder
+            float difficultyConstant = 0.10f;
+            float respawnTimeEnemiesWithLevel = respawnTimeEnemies;
+            if (respawnTimeEnemies > 0.05f && respawnTimeEnemies - (difficultyConstant * (gameStats.level - 1)) > 0.05f) {
+                respawnTimeEnemiesWithLevel = respawnTimeEnemies - (difficultyConstant * (gameStats.level - 1));
+            }
+            
+            //Debug: super hard, lose immediately
+            // respawnTimeEnemiesWithLevel = 0.05f;
+            yield return new WaitForSeconds(respawnTimeEnemiesWithLevel);
+            Debug.Log("respawnTimeEnemiesWithLevel: " + respawnTimeEnemiesWithLevel);
+
             spawnEnemy();
         }
     }

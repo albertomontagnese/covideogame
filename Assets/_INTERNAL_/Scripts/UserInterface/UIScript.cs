@@ -22,7 +22,7 @@ public class UIScript : MonoBehaviour
 	public Text[] numberLabels = new Text[2];
 	public Text rightLabel, leftLabel;
 	public Text winLabel;
-	public GameObject statsPanel, gameOverPanel, winPanel;
+	public GameObject statsPanel, gameOverPanel, winPanel, statsPanelBottom;
 	public Transform inventory;
 	public GameObject resourceItemPrefab;
 
@@ -32,14 +32,14 @@ public class UIScript : MonoBehaviour
 	public int[] playersHealth = new int[2];
 	private Dictionary<int, ResourceStruct> resourcesDict = new Dictionary<int, ResourceStruct>(); //holds a reference to all the resources collected, and to their UI
     public bool gameOver = false; //this gets changed when the game is won OR lost
-
- 
- 	public Stopwatch timer;
+	public Stopwatch timer;
+	public int level = 0;
  
  	private void Start()
 	{
 		//ctr
 		timer = new Stopwatch();
+
 		timer.Start();
 
 		if(numberOfPlayers == Players.OnePlayer)
@@ -65,6 +65,16 @@ public class UIScript : MonoBehaviour
 				// Life will be provided by the PlayerHealth components
 			}
 		}
+	}
+
+	private void Update() {
+		GameObject.Find("LeftNumberBottom").GetComponent<UnityEngine.UI.Text>().text = timer.Elapsed.ToString("hh\\:mm\\:ss\\.ff");
+		int newLevel = System.Convert.ToInt32(timer.ElapsedMilliseconds / 30000) + 1;
+		if (level < newLevel) {
+			level = newLevel;
+			GameObject.Find("RightNumberBottom").GetComponent<UnityEngine.UI.Text>().text = newLevel.ToString();
+		}
+		
 	}
 
 	//version of the one below with one parameter to be able to connect UnityEvents
@@ -134,8 +144,20 @@ public class UIScript : MonoBehaviour
 	    {
 			timer.Stop();
 			gameOver = true;
-	        statsPanel.SetActive(false);
+	        // statsPanel.SetActive(false);
 	        gameOverPanel.SetActive(true);
+
+			// string restOfLabel = "\nDo the 5: \n1. HANDS Wash them often \n2. ELBOW Cough into it \n3. FACE Don't touch it \n4. SPACE Keep safe distance \n5. HOME Stay if you can";
+			string restOfLabel = "\nStay Home & Play On :)";
+			string gameOverLabel = "Score: " + scores[playerNumber].ToString() + restOfLabel ;
+			// if (level < 3) {
+			// 	gameOverLabel = "Score: " + scores[playerNumber].ToString() + restOfLabel ;
+			// } else if (level < 6) {
+			// 	gameOverLabel = "";
+			// } else {
+			// 	gameOverLabel = "";
+			// }
+			GameObject.Find("GameOverLabel").GetComponent<UnityEngine.UI.Text>().text = gameOverLabel;
 	    }
 	}
 
