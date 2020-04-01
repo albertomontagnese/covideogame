@@ -12,7 +12,7 @@ public class enemyDefaultScript : MonoBehaviour
     void Start () {
         SpriteRenderer spriteRenderer; 
         string spritePath = "Untitled";
-        int randomEnemyNumber = Random.Range(0, 10);
+        int randomEnemyNumber = Random.Range(0, 9);
         spritePath += randomEnemyNumber;
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         Sprite sp  =  Resources.Load (spritePath, typeof(Sprite)) as Sprite;
