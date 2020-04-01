@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 3615097091263179598}
   - component: {fileID: 3615097091263179599}
   - component: {fileID: 3615097091263179587}
-  - component: {fileID: 3615097091263179586}
-  - component: {fileID: 3615097091263179585}
+  - component: {fileID: 134190769}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1eaabfea0c533c04d9c488d185e7454e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91d24fa4cf60e4ca8a1b6902dc21cb65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,8 +98,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 1000
+  m_LinearDrag: 0
+  m_AngularDrag: 10000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -124,7 +123,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0600001, y: 2.6345632}
+    oldSize: {x: 0.94, y: 2.01}
     newSize: {x: 1.0600001, y: 2.6345632}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -186,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyWhenActivated: 0
   healthChange: -1
---- !u!114 &3615097091263179586
+--- !u!114 &134190769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,23 +194,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3615097091263179592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f0bfabf363d4ec5993fbd4f9908ad8, type: 3}
+  m_Script: {fileID: 11500000, guid: 46c296e7ee5bd4671a8333b51f2fea8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 0}
-  direction: {x: 1, y: 0}
-  relativeToRotation: 1
---- !u!114 &3615097091263179585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3615097091263179592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c62d65bd264a4e088b75b7511b9467a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody2D: {fileID: 0}
-  rotationSpeed: 5
+  speed: 15
