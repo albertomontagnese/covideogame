@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Diagnostics;
+using UnityEngine.SceneManagement;
+
 
 
 [AddComponentMenu("")]
@@ -74,6 +76,12 @@ public class UIScript : MonoBehaviour
 			level = newLevel;
 			GameObject.Find("RightNumberBottom").GetComponent<UnityEngine.UI.Text>().text = newLevel.ToString();
 		}
+
+		if (gameOver && (Input.GetMouseButtonDown(0) || Input.touchCount > 0))
+			{ 
+				UnityEngine.Debug.Log("restart");
+				SceneManager.LoadScene("AlbertoMainScene"); 
+			}
 		
 	}
 
@@ -148,7 +156,7 @@ public class UIScript : MonoBehaviour
 	        gameOverPanel.SetActive(true);
 
 			// string restOfLabel = "\nDo the 5: \n1. HANDS Wash them often \n2. ELBOW Cough into it \n3. FACE Don't touch it \n4. SPACE Keep safe distance \n5. HOME Stay if you can";
-			string restOfLabel = "\nStay Home & Play On :)";
+			string restOfLabel = "\nStay Home & Play On :) \n Touch anywhere to restart";
 			string gameOverLabel = "Score: " + scores[playerNumber].ToString() + restOfLabel ;
 			// if (level < 3) {
 			// 	gameOverLabel = "Score: " + scores[playerNumber].ToString() + restOfLabel ;
